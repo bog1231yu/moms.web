@@ -1,0 +1,117 @@
+[
+  {
+    "_id": "1775465493816",
+    "name": "Classic Burger",
+    "description": "Juicy beef patty with lettuce, tomato, onion, and our special sauce",
+    "price": 12.99,
+    "salePrice": 9.99,
+    "category": "Food",
+    "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300",
+    "images": [
+      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300"
+    ],
+    "stock": 50,
+    "sku": "BURGER-001",
+    "rating": 0,
+    "reviewCount": 0,
+    "tags": [
+      "popular",
+      "beef"
+    ],
+    "isActive": true,
+    "createdAt": "2026-04-06T08:51:33.816Z",
+    "updatedAt": "2026-04-06T08:51:33.816Z"
+  },
+  {
+    "_id": "1775465493818",
+    "name": "Margherita Pizza",
+    "description": "Fresh mozzarella, tomato sauce, and basil on our signature crust",
+    "price": 15.99,
+    "salePrice": null,
+    "category": "Food",
+    "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300",
+    "images": [
+      "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300"
+    ],
+    "stock": 30,
+    "sku": "PIZZA-001",
+    "rating": 0,
+    "reviewCount": 0,
+    "tags": [
+      "vegetarian",
+      "classic"
+    ],
+    "isActive": true,
+    "createdAt": "2026-04-06T08:51:33.818Z",
+    "updatedAt": "2026-04-06T08:51:33.818Z"
+  },
+  {
+    "_id": "1775465493818",
+    "name": "Caesar Salad",
+    "description": "Crisp romaine lettuce with parmesan cheese, croutons, and Caesar dressing",
+    "price": 8.99,
+    "salePrice": null,
+    "category": "Salads",
+    "image": "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=300",
+    "images": [
+      "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=300"
+    ],
+    "stock": 40,
+    "sku": "SALAD-001",
+    "rating": 0,
+    "reviewCount": 0,
+    "tags": [
+      "healthy",
+      "vegetarian"
+    ],
+    "isActive": true,
+    "createdAt": "2026-04-06T08:51:33.818Z",
+    "updatedAt": "2026-04-06T08:51:33.818Z"
+  },
+  {
+    "_id": "1775465493819",
+    "name": "French Fries",
+    "description": "Golden crispy fries served with ketchup",
+    "price": 4.99,
+    "salePrice": null,
+    "category": "Sides",
+    "image": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=300",
+    "images": [
+      "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=300"
+    ],
+    "stock": 100,
+    "sku": "FRIES-001",
+    "rating": 0,
+    "reviewCount": 0,
+    "tags": [
+      "side",
+      "crispy"
+    ],
+    "isActive": true,
+    "createdAt": "2026-04-06T08:51:33.819Z",
+    "updatedAt": "2026-04-06T08:51:33.819Z"
+  },
+  {
+    "_id": "1775465493820",
+    "name": "Chocolate Milkshake",
+    "description": "Rich and creamy chocolate milkshake topped with whipped cream",
+    "price": 6.99,
+    "salePrice": null,
+    "category": "Drinks",
+    "image": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=300",
+    "images": [
+      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=300"
+    ],
+    "stock": 25,
+    "sku": "SHAKE-001",
+    "rating": 0,
+    "reviewCount": 0,
+    "tags": [
+      "sweet",
+      "cold"
+    ],
+    "isActive": true,
+    "createdAt": "2026-04-06T08:51:33.820Z",
+    "updatedAt": "2026-04-06T08:51:33.820Z"
+  }
+]

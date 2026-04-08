@@ -1,0 +1,17 @@
+[
+  {
+    "_id": "1775634815531",
+    "firstName": "Tornike",
+    "lastName": "Gerantia",
+    "email": "tornikegerantia@gmail.com",
+    "password": "$2a$10$tOkl9NlxRK8dyT9M1iQm..IGo.64SeCAZL2IYSbrOLYn0RwRhpC0O",
+    "phone": null,
+    "address": {},
+    "role": "user",
+    "isActive": true,
+    "profileImage": null,
+    "lastLogin": null,
+    "createdAt": "2026-04-08T07:53:35.531Z",
+    "updatedAt": "2026-04-08T07:53:35.613Z"
+  }
+]
