@@ -1358,69 +1358,39 @@
       }
     });
 
-    // Fallback products for when API fails due to security restrictions
     function showFallbackProducts() {
-      console.log('Showing fallback products due to security restrictions');
-      const fallbackProducts = [
-        {
-          _id: '1',
-          name: 'Classic Burger',
-          description: 'Juicy beef patty with lettuce, tomato, onion, and our special sauce',
-          price: 12.99,
-          image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300'
-        },
-        {
-          _id: '2', 
-          name: 'Margherita Pizza',
-          description: 'Fresh mozzarella, tomato sauce, and basil on our signature crust',
-          price: 15.99,
-          image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300'
-        },
-        {
-          _id: '3',
-          name: 'Caesar Salad',
-          description: 'Crisp romaine lettuce with parmesan cheese, croutons, and Caesar dressing',
-          price: 8.99,
-          image: 'https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=300'
-        }
-      ];
-      
-      displayProducts(fallbackProducts);
-      
-      // Show security notice
-      const notice = document.createElement('div');
-      notice.style.cssText = 'background: #f44336; color: white; padding: 15px; margin: 20px; border-radius: 5px; text-align: center;';
-      notice.innerHTML = '🔒 API blocked by browser security. Showing demo products. In production, use HTTPS to enable full functionality.';
-      document.querySelector('.container').prepend(notice);
+      displayProducts([]);
     }
 
-    // Function to display products in the grid
     function displayProducts(products) {
-      // Find the active tab pane (Burgers tab is currently active)
       const productGrid = document.querySelector('.w-tab-pane.w--tab-active .order-collection');
       if (!productGrid) {
         console.error('Active tab product grid not found');
         return;
       }
 
-      // Clear existing products
       productGrid.innerHTML = '';
 
-      products.forEach(product => {
+      const boxes = Array.from({ length: 8 }, (_, index) => {
+        const product = products[index] || {};
+        return {
+          _id: product._id || `box-${index + 1}`,
+          name: `box${index + 1}`,
+          price: Number(product.price || 0)
+        };
+      });
+
+      boxes.forEach(product => {
         const productHTML = `
           <div class="menu-item w-dyn-item w-col w-col-6" role="listitem">
             <div class="food-card">
-              <div class="food-image-square w-inline-block">
-                <img alt="${product.name}" class="food-image" src="${product.image}" />
-              </div>
               <div class="food-card-content">
                 <div class="food-title-wrap w-inline-block">
                   <h6>${product.name}</h6>
                   <div class="price">$${product.price.toFixed(2)} USD</div>
                 </div>
-                <p class="paragraph">${product.description}</p>
                 <div class="add-to-cart">
-                  <input class="quantity" type="number" min="1" value="1" id="quantity-${product._id}" />
+                  <input class="quantity" type="hidden" min="1" value="1" id="quantity-${product._id}" />
                   <button class="order-button w-button add-to-cart-btn" 
                           data-product-id="${product._id}" 
                           data-product-name="${product.name}">

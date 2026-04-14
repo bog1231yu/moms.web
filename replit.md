@@ -13,3 +13,4 @@
 ## Important Notes
 - Run backend commands from the `backend/` directory so static files resolve correctly.
 - The frontend API helper uses relative same-origin `/api` URLs when served over HTTP.
+- User preference: never change the site's colors unless explicitly requested; only change objects/content/layout.
