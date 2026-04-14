@@ -3761,6 +3761,12 @@ li {
   position: relative;
 }
 
+.title-wrap-centre.menu-title-visible h2,
+.title-wrap-centre.menu-title-visible p,
+.title-wrap-centre.menu-title-visible a {
+  color: #000 !important;
+}
+
 .works-grid {
   grid-column-gap: 0px;
   grid-template-rows: auto;
