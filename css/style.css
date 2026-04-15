@@ -391,6 +391,138 @@ html {
   font-size: 0.95rem;
 }
 
+.admin-page {
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+  background: linear-gradient(180deg, #f9ffeb 0%, #f0ffdb 55%, #ffffff 100%);
+}
+
+.admin-panel {
+  width: min(100%, 1180px);
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(34, 84, 0, 0.12);
+  border-radius: 28px;
+  box-shadow: 0 36px 80px rgba(38, 88, 6, 0.12);
+  padding: 2rem;
+}
+
+.admin-header,
+.admin-code-row,
+.admin-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.admin-header h1 {
+  margin: 0 0 0.5rem;
+  color: #1d4700;
+}
+
+.admin-header p {
+  margin: 0;
+  color: #4f6f31;
+}
+
+.admin-code-row {
+  margin-top: 1.5rem;
+  justify-content: flex-start;
+}
+
+.admin-code-row label {
+  color: #4b640d;
+  font-weight: 700;
+}
+
+.admin-code-row .auth-input {
+  max-width: 260px;
+}
+
+.admin-small-button {
+  width: auto;
+}
+
+.admin-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.admin-box-card {
+  border: 1px solid rgba(34, 84, 0, 0.12);
+  border-radius: 22px;
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.admin-box-card label {
+  display: grid;
+  gap: 0.5rem;
+  color: #4b640d;
+  font-weight: 700;
+}
+
+.admin-box-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admin-box-title h2 {
+  margin: 0;
+  color: #1d4700;
+}
+
+.admin-box-title span {
+  color: #5b742e;
+}
+
+.admin-image-preview,
+.admin-image-placeholder {
+  width: 100%;
+  height: 180px;
+  border-radius: 18px;
+}
+
+.admin-image-preview {
+  object-fit: cover;
+}
+
+.admin-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed rgba(34, 84, 0, 0.24);
+  color: #5b742e;
+}
+
+.admin-actions {
+  margin-top: 1.5rem;
+  justify-content: flex-start;
+}
+
+.admin-home-link {
+  text-align: center;
+  text-decoration: none;
+}
+
+.box-card-image {
+  width: 92px;
+  height: 92px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-right: 24px;
+}
+
+.box-card-description {
+  margin-top: 8px;
+}
+
 body {
   color: #333;
   background-color: #fff;

@@ -68,6 +68,9 @@
       <a class="nav-link w-nav-link" href="index.html#call-store">
        Contact
       </a>
+      <a class="nav-link w-nav-link" href="admin.html">
+       Admin
+      </a>
      </nav>
      <a class="auth-link" href="login.html">
       Login / Register
@@ -1370,19 +1373,29 @@
         return {
           _id: product._id || `box-${index + 1}`,
           name: `box${index + 1}`,
-          price: Number(product.price || 0)
+          price: Number(product.price || 0),
+          image: product.image || '',
+          description: product.description || ''
         };
       });
 
       boxes.forEach(product => {
+        const imageHTML = product.image
+          ? `<img class="box-card-image" src="${product.image}" alt="${product.name}" />`
+          : '';
+        const descriptionHTML = product.description
+          ? `<p class="paragraph box-card-description">${product.description}</p>`
+          : '';
         const productHTML = `
           <div class="menu-item w-dyn-item w-col w-col-6" role="listitem">
             <div class="food-card">
+              ${imageHTML}
               <div class="food-card-content">
                 <div class="food-title-wrap w-inline-block">
                   <h6>${product.name}</h6>
                   <div class="price">$${product.price.toFixed(2)} USD</div>
                 </div>
+                ${descriptionHTML}
                 <div class="add-to-cart">
                   <input class="quantity" type="hidden" min="1" value="1" id="quantity-${product._id}" />
                   <button class="order-button w-button add-to-cart-btn" 

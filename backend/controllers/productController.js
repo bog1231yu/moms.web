@@ -31,6 +31,8 @@ exports.getAllProducts = async (req, res) => {
       products.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     } else if (sortBy === 'rating') {
       products.sort((a, b) => b.rating - a.rating);
+    } else if (products.length && products.every(product => String(product.sku || '').startsWith('BOX-'))) {
+      products.sort((a, b) => String(a.sku).localeCompare(String(b.sku)));
     } else {
       products.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     }

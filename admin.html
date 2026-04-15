@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Box Editor</title>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <div class="admin-page">
+    <div class="admin-panel">
+      <div class="admin-header">
+        <div>
+          <h1>Administrator box editor</h1>
+          <p>Change the price, picture, and description for all 8 boxes.</p>
+        </div>
+        <a class="auth-tab admin-home-link" href="index.html">Back to home</a>
+      </div>
+
+      <div class="admin-code-row">
+        <label for="admin-code">Admin code</label>
+        <input class="auth-input" id="admin-code" type="password" placeholder="Enter admin code" autocomplete="off" />
+        <button class="auth-submit admin-small-button" id="load-boxes" type="button">Load boxes</button>
+      </div>
+
+      <p id="admin-message" class="auth-note">Enter the admin code to edit box details.</p>
+
+      <form id="admin-form" class="admin-grid" style="display:none;"></form>
+
+      <div class="admin-actions" id="admin-actions" style="display:none;">
+        <button class="auth-submit" id="save-boxes" type="button">Save all box changes</button>
+        <a class="auth-tab admin-home-link" href="order.html">View order page</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

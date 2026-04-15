@@ -21,12 +21,12 @@ class Product {
     this._id = data._id || Date.now().toString();
     this.name = data.name;
     this.description = data.description;
-    this.price = data.price;
+    this.price = Number(data.price || 0);
     this.salePrice = data.salePrice || null;
     this.category = data.category;
     this.image = data.image;
     this.images = data.images || [data.image];
-    this.stock = data.stock;
+    this.stock = Number(data.stock || 0);
     this.sku = data.sku;
     this.rating = data.rating || 0;
     this.reviewCount = data.reviewCount || 0;
@@ -154,6 +154,17 @@ Product.findByIdAndUpdate = async (id, updateData) => {
     return new Product(products[index]);
   } catch (error) {
     console.error('Error updating product:', error);
+    throw error;
+  }
+};
+
+Product.replaceAll = async (productsData) => {
+  try {
+    const products = productsData.map(data => new Product(data));
+    fs.writeFileSync(PRODUCTS_FILE, JSON.stringify(products, null, 2));
+    return products;
+  } catch (error) {
+    console.error('Error replacing products:', error);
     throw error;
   }
 };
