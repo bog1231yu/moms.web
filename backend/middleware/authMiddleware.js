@@ -29,6 +29,7 @@ exports.protect = async (req, res, next) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
+    user.id = user._id;
     req.user = user;
     next();
   } catch (error) {

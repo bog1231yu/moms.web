@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 
 // Simple file-based storage for demo purposes
 const USERS_FILE = path.join(__dirname, '../data/users.json');
@@ -19,10 +20,11 @@ if (!fs.existsSync(USERS_FILE)) {
 // User Schema (simplified for file storage)
 class User {
   constructor(data) {
-    this._id = data._id || Date.now().toString();
+    this._id = data._id || crypto.randomUUID();
+    this.id = this._id;
     this.firstName = data.firstName;
     this.lastName = data.lastName;
-    this.email = data.email;
+    this.email = data.email ? data.email.toLowerCase().trim() : data.email;
     this.password = data.password;
     this.phone = data.phone || null;
     this.address = data.address || {};
@@ -108,7 +110,8 @@ User.findOne = async (query) => {
   try {
     const users = await User.find();
     if (query.email) {
-      return users.find(u => u.email === query.email) || null;
+      const email = query.email.toLowerCase().trim();
+      return users.find(u => u.email === email) || null;
     }
     return null;
   } catch (error) {
@@ -120,13 +123,13 @@ User.findOne = async (query) => {
 User.create = async (data) => {
   try {
     const users = await User.find();
+    const email = data.email.toLowerCase().trim();
 
-    // Check for duplicate email
-    if (users.some(u => u.email === data.email)) {
+    if (users.some(u => u.email === email)) {
       throw new Error('Email already in use');
     }
 
-    const newUser = new User(data);
+    const newUser = new User({ ...data, email });
     await newUser.save();
 
     return newUser;

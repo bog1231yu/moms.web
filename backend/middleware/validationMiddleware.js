@@ -7,9 +7,7 @@ const validateEmail = (email) => {
 };
 
 const validatePassword = (password) => {
-  // At least 8 characters, 1 uppercase, 1 lowercase, 1 number
-  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/;
-  return regex.test(password);
+  return typeof password === 'string' && password.length >= 6;
 };
 
 const validatePhone = (phone) => {

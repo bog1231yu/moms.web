@@ -15,19 +15,20 @@ const generateToken = (id) => {
 exports.register = async (req, res) => {
   try {
     const { firstName, lastName, email, password, passwordConfirm } = req.body;
+    const normalizedEmail = email ? email.toLowerCase().trim() : '';
 
     // Validation
     if (!firstName || !lastName || !email || !password || !passwordConfirm) {
       return res.status(400).json({ message: 'All fields are required' });
     }
 
-    if (!validateEmail(email)) {
+    if (!validateEmail(normalizedEmail)) {
       return res.status(400).json({ message: 'Invalid email format' });
     }
 
     if (!validatePassword(password)) {
       return res.status(400).json({
-        message: 'Password must be at least 8 characters with uppercase, lowercase, and number',
+        message: 'Password must be at least 6 characters',
       });
     }
 
@@ -36,7 +37,7 @@ exports.register = async (req, res) => {
     }
 
     // Check if user already exists
-    let user = await User.findOne({ email });
+    let user = await User.findOne({ email: normalizedEmail });
     if (user) {
       return res.status(400).json({ message: 'Email already in use' });
     }
@@ -45,7 +46,7 @@ exports.register = async (req, res) => {
     user = await User.create({
       firstName,
       lastName,
-      email,
+      email: normalizedEmail,
       password,
     });
 
@@ -69,18 +70,18 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    const normalizedEmail = email ? email.toLowerCase().trim() : '';
 
     // Validation
     if (!email || !password) {
       return res.status(400).json({ message: 'Email and password are required' });
     }
 
-    if (!validateEmail(email)) {
+    if (!validateEmail(normalizedEmail)) {
       return res.status(400).json({ message: 'Invalid email format' });
     }
 
-    // Check if user exists and get password field
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: normalizedEmail });
     if (!user) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
@@ -173,7 +174,7 @@ exports.refreshToken = async (req, res) => {
 // @access  Private
 exports.getMe = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(req.user._id);
 
     res.status(200).json({
       success: true,

@@ -6,6 +6,26 @@ const API_BASE_URL = (function() {
   return 'http://localhost:5000/api';
 })();
 const TOKEN_KEY = 'authToken';
+const USER_KEY = 'authUser';
+
+function saveAuth(data) {
+  if (data && data.token) {
+    localStorage.setItem(TOKEN_KEY, data.token);
+  }
+  if (data && data.user) {
+    localStorage.setItem(USER_KEY, JSON.stringify(data.user));
+  }
+}
+
+function getStoredUser() {
+  try {
+    const user = localStorage.getItem(USER_KEY);
+    return user ? JSON.parse(user) : null;
+  } catch (error) {
+    localStorage.removeItem(USER_KEY);
+    return null;
+  }
+}
 
 // Ensure auth methods are available globally for inline scripts
 window.login = async function(email, password) {
@@ -18,8 +38,8 @@ window.login = async function(email, password) {
 
     const data = await response.json();
     if (data.success) {
-      localStorage.setItem(TOKEN_KEY, data.token);
-      console.log('Login successful');
+      saveAuth(data);
+      updateAuthLinks();
       return data;
     }
 
@@ -42,8 +62,8 @@ window.register = async function(firstName, lastName, email, password, passwordC
 
     const data = await response.json();
     if (data.success) {
-      localStorage.setItem(TOKEN_KEY, data.token);
-      console.log('Registration successful');
+      saveAuth(data);
+      updateAuthLinks();
       return data;
     }
 
@@ -62,8 +82,11 @@ window.register = async function(firstName, lastName, email, password, passwordC
 
 function logout() {
   localStorage.removeItem(TOKEN_KEY);
-  console.log('Logged out');
+  localStorage.removeItem(USER_KEY);
+  updateAuthLinks();
 }
+
+window.logout = logout;
 
 function isLoggedIn() {
   return localStorage.getItem(TOKEN_KEY) !== null;
@@ -71,6 +94,62 @@ function isLoggedIn() {
 
 function getToken() {
   return localStorage.getItem(TOKEN_KEY);
+}
+
+async function getCurrentUser() {
+  const token = getToken();
+  if (!token) return null;
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/me`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    if (data.success) {
+      localStorage.setItem(USER_KEY, JSON.stringify(data.user));
+      updateAuthLinks();
+      return data.user;
+    }
+    logout();
+    return null;
+  } catch (error) {
+    return getStoredUser();
+  }
+}
+
+window.getCurrentUser = getCurrentUser;
+
+function updateAuthLinks() {
+  if (typeof document === 'undefined') return;
+
+  const user = getStoredUser();
+  document.querySelectorAll('.auth-link').forEach(link => {
+    if (isLoggedIn()) {
+      const name = user && user.firstName ? user.firstName : 'Account';
+      link.textContent = `Logout (${name})`;
+      link.href = '#';
+      link.onclick = event => {
+        event.preventDefault();
+        logout();
+        window.location.href = 'login.html';
+      };
+    } else {
+      link.textContent = 'Login / Register';
+      link.href = 'login.html';
+      link.onclick = null;
+    }
+  });
+}
+
+window.updateAuthLinks = updateAuthLinks;
+
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', () => {
+    updateAuthLinks();
+    if (isLoggedIn()) {
+      getCurrentUser();
+    }
+  });
 }
 
 // ============================================
